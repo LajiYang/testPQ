@@ -20,7 +20,7 @@ Page({
   onLoad: function() {
     if (app.globalData.userInfo) {
       this.setData({
-        userInfo: app.globalData.userInfo,
+        userInfo: app.globalData.userInfo, 
         hasUserInfo: true
       })
     } else if (this.data.canIUse) {

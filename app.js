@@ -11,6 +11,7 @@ App({
       success: (res) => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
         console.log('11111111')
+        console.log('22222222')
       }
     })
     // 获取用户信息

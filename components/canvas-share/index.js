@@ -9,9 +9,11 @@ function getImageInfo(url) {
 }
 
 function createRpx2px() {
-  const { windowWidth } = wx.getSystemInfoSync()
+  const {
+    windowWidth
+  } = wx.getSystemInfoSync()
 
-  return function(rpx) {
+  return function (rpx) {
     return (windowWidth / 750) * rpx;
   }
 }
@@ -20,8 +22,7 @@ const rpx2px = createRpx2px()
 
 function canvasToTempFilePath(option, context) {
   return new Promise((resolve, reject) => {
-    wx.canvasToTempFilePath(
-      {
+    wx.canvasToTempFilePath({
         ...option,
         success: resolve,
         fail: reject
@@ -77,7 +78,10 @@ Component({
       const designHeight = 603 // 这是在顶部位置定义，底部无tabbar情况下的设计稿高度
 
       // 以iphone6为设计稿，计算相应的缩放比例
-      const { windowWidth, windowHeight } = wx.getSystemInfoSync()
+      const {
+        windowWidth,
+        windowHeight
+      } = wx.getSystemInfoSync()
       const responsiveScale =
         windowHeight / ((windowWidth / designWidth) * designHeight)
       if (responsiveScale < 1) {
@@ -93,7 +97,9 @@ Component({
       this.triggerEvent('close')
     },
     handleSave() {
-      const { imageFile } = this.data
+      const {
+        imageFile
+      } = this.data
 
       if (imageFile) {
         saveImageToPhotosAlbum({
@@ -109,8 +115,15 @@ Component({
     },
     draw() {
       wx.showLoading()
-      const { userInfo, canvasWidth, canvasHeight } = this.data
-      const { avatarUrl, nickName } = userInfo
+      const {
+        userInfo,
+        canvasWidth,
+        canvasHeight
+      } = this.data
+      const {
+        avatarUrl,
+        nickName
+      } = userInfo
       const avatarPromise = getImageInfo(avatarUrl)
       const backgroundPromise = getImageInfo(
         'https://img.xiaomeipingou.com/_assets_home-share-bg.jpg'
@@ -145,21 +158,28 @@ Component({
           ctx.fillText(nickName, canvasW / 2, y + rpx2px(150 * 2))
           ctx.stroke()
           ctx.draw(false, () => {
-            canvasToTempFilePath(
-              {
+            canvasToTempFilePath({
                 canvasId: 'share'
               },
               this
-            ).then(({ tempFilePath }) =>
-              this.setData({ imageFile: tempFilePath })
+            ).then(({
+                tempFilePath
+              }) =>
+              this.setData({
+                imageFile: tempFilePath
+              })
             )
           })
 
           wx.hideLoading()
-          this.setData({ isDraw: true })
+          this.setData({
+            isDraw: true
+          })
         })
         .catch(() => {
-          this.setData({ beginDraw: false })
+          this.setData({
+            beginDraw: false
+          })
           wx.hideLoading()
         })
     }

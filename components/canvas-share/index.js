@@ -12,7 +12,7 @@ function createRpx2px() {
   const { windowWidth } = wx.getSystemInfoSync()
 
   return function(rpx) {
-    return (windowWidth / 750) * rpx;
+    return (windowWidth / 750) * rpx
   }
 }
 
